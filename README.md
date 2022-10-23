@@ -1,2 +1,2 @@
-# stm32_playground
-STM32F1 playground for register level programming
+# STM32 Playground
+STM32F1 playground for register level programming based on the Mutex Embedded Course on Udemy.
