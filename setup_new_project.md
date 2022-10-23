@@ -1,0 +1,25 @@
+- New > STM32 Project
+- Select Target (STM32F103C8T6)
+- Target Project Type > Empty
+- Remove syscalls.c and sysmem.c
+- Copy necessary STM32-header files to Inc folder (stm32f1xx.h, stm32f103xb.h, system_stm32f1xx.h)
+- Create a Core folder and move Inc and Src folders there
+- Add CMSIS header files to CMSIS folder
+- Replace the auto generated startup file with the CMSIS startup file for the device (startup_stm32f103xb.s)
+- Copy the system source file to the Core/Src folder (system_stm32f1xx.c from CMSIS/Device/ST/STM32F1xx/Source/Templates)
+- Adjust compiler settings in (Properties > C/C++ General)
+  - Paths and Symbols
+    - Inc -> ${ProjDirPath}/Core/Inc
+    - ${ProjDirPath}/CMSIS/Inc
+  - Source Location
+    - Core
+    - CMSIS
+  - Symbols
+    - Delete all but DEBUG
+    - Add Type of STM-Series Symbol (STM32F103xB)
+- Remove all in main.c and let only the loop
+- Create a main.h file
+  - #include "stm32f1xx.h"
+  - #include <stdbool.h>
+  - #include <stdio.h>
+- #include "main.h" in main.c
