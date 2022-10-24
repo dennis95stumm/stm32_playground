@@ -10,15 +10,6 @@
 #ifndef REGISTERS_H_
 #define REGISTERS_H_
 
-/**
- * @brief Status of a peripheral device interaction.
- */
-/* TODO: Really Registers or peripherals??? */
-typedef enum __status_t {
-  REGISTER_STATUS_OK = 0, /**< STATUS_OK */
-  REGISTER_STATUS_ERROR = 1, /**< STATUS_ERROR */
-  REGISTER_STATUS_TIMEOUT = 2/**< STATUS_TIMEOUT */
-} status_t;
 
 /**
  * @brief State of a register.
