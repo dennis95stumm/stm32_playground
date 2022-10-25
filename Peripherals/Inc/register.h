@@ -10,6 +10,8 @@
 #ifndef REGISTERS_H_
 #define REGISTERS_H_
 
+#include <stdint.h>
+#include <stdbool.h>
 
 /**
  * @brief State of a register.
@@ -26,7 +28,11 @@ typedef enum __state_t {
  * @param pinMask Pin mask in the register to read the state from.
  * @return The state of the pin mask in the passed register.
  */
-state_t REGISTER_ReadState(uint32_t dataRegister, uint32_t pinMask);
+bool REGISTER_IsSet(volatile uint32_t *dataRegister, uint32_t pinMask);
+
+void REGISTER_Set(volatile uint32_t *dataRegister, uint32_t pinMask);
+
+void REGISTER_Reset(volatile uint32_t *dataRegister, uint32_t pinMask);
 
 /**
  * @brief Writes the passed state to the passed register pin mask.
@@ -35,7 +41,10 @@ state_t REGISTER_ReadState(uint32_t dataRegister, uint32_t pinMask);
  * @param pinMask PinMask in the register to write the state to.
  * @param state The state to write to the pin mask in the register.
  */
-void REGISTER_WriteState(uint32_t dataRegister, uint32_t pinMask, state_t state);
+void REGISTER_WriteState(
+  volatile uint32_t *dataRegister,
+  uint32_t pinMask,
+  state_t state);
 
 /**
  * @brief Toggles a pin mask state in a register.
@@ -43,7 +52,7 @@ void REGISTER_WriteState(uint32_t dataRegister, uint32_t pinMask, state_t state)
  * @param dataRegister Register to toggle the state for.
  * @param pinMask Mask of the pins whoose state should be toggled.
  */
-void REGISTER_ToggleState(uint32_t dataRegister, uint32_t pinMask);
+void REGISTER_ToggleState(volatile uint32_t *dataRegister, uint32_t pinMask);
 
 /**
  * @brief Waits until a pin mask is not set in a register.
@@ -51,6 +60,6 @@ void REGISTER_ToggleState(uint32_t dataRegister, uint32_t pinMask);
  * @param dataRegister Register to check the state for.
  * @param pinMask Mask of the pins whoose state should be checked.
  */
-void REGISTER_WaitUntilSet(uint32_t dataRegister, uint32_t pinMask);
+void REGISTER_WaitUntilSet(volatile uint32_t *dataRegister, uint32_t pinMask);
 
 #endif /* REGISTERS_H_ */

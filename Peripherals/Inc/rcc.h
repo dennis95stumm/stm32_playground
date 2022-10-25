@@ -11,6 +11,8 @@
 #ifndef PERIPHERALS_INC_RCC_H_
 #define PERIPHERALS_INC_RCC_H_
 
+#include <stdint.h>
+
 /**
  * @brief Configures the system clocks to by using an external oscillator. With
  * the following settings:

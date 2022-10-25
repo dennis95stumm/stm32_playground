@@ -122,3 +122,6 @@ local.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
 /Debug/
+/Program 01/
+/Program 02/
+/Program 03/

@@ -8,26 +8,39 @@
  ******************************************************************************
  */
 
+#include <stm32f103xb.h>
 #include <register.h>
 
-state_t REGISTER_ReadState(uint32_t dataRegister, uint32_t pinMask) {
-  return (state_t) ((dataRegister & pinMask) == pinMask);
+bool REGISTER_IsSet(volatile uint32_t *dataRegister, uint32_t pinMask) {
+  return (*dataRegister & pinMask) == pinMask;
 }
 
-void REGISTER_WriteState(uint32_t dataRegister, uint32_t pinMask, state_t state) {
+void REGISTER_Set(volatile uint32_t *dataRegister, uint32_t pinMask) {
+  *dataRegister |= pinMask;
+}
+
+void REGISTER_Reset(volatile uint32_t *dataRegister, uint32_t pinMask) {
+  *dataRegister &= ~(pinMask);
+}
+
+void REGISTER_WriteState(
+  volatile uint32_t *dataRegister,
+  uint32_t pinMask,
+  state_t state) {
+
   if (state == REGISTER_STATE_SET) {
-    dataRegister |= pinMask;
+    REGISTER_Set(dataRegister, pinMask);
   } else {
-    dataRegister &= ~(pinMask);
+    REGISTER_Reset(dataRegister, pinMask);
   }
 }
 
-void REGISTER_ToggleState(uint32_t dataRegister, uint32_t pinMask) {
-  dataRegister ^= pinMask;
+void REGISTER_ToggleState(volatile uint32_t *dataRegister, uint32_t pinMask) {
+  *dataRegister ^= pinMask;
 }
 
-void REGISTER_WaitUntilSet(uint32_t dataRegister, uint32_t pinMask) {
-  while (((state_t) (dataRegister & pinMask)) == REGISTER_STATE_RESET) {
+void REGISTER_WaitUntilSet(volatile uint32_t *dataRegister, uint32_t pinMask) {
+  while (!REGISTER_IsSet(dataRegister, pinMask)) {
     __NOP();
   }
 }

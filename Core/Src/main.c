@@ -9,8 +9,12 @@
  */
 
 #include <main.h>
+#include <program.h>
 
 int main(void) {
+  configure();
+
   while (1) {
+    run();
   }
 }

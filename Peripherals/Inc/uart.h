@@ -10,6 +10,8 @@
 #ifndef INC_UART_H_
 #define INC_UART_H_
 
+#include <stdint.h>
+
 #define UART_SR_ERROR_MSK (USART_SR_PE | USART_SR_FE | USART_SR_NE | USART_SR_ORE)
 
 /* DIV = 72M/(16*115200)=39.0625 = Mantissa 0x27, Fraction 16*0,0625=1 */
